@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster&text=%20DOayut);
+@import "compass/css3/box-sizing";
 @import url(http://fonts.googleapis.com/css?family=Oleo%20Script&text=ANice);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 @import "compass/css3/border-radius";
@@ -31,12 +32,15 @@ $dred:#6D0000;
 	color:$dred !important;
 }
 #map{
-	display:relative;
+	position:relative;
+	
 	width:100%;
 	height:300px;
 }
 body{
 	>div{
+		margin-bottom:100px;
+		bottom:40px;
 		@include border-radius(10px);
 		border:5px solid $dred;
 		border-top:0px;
@@ -57,7 +61,7 @@ body{
 		width:$mainwidth;
 		margin-left:$mainwidth/(-2);
 		left:50%;
-		margin-top:200px;
+		margin-top:100px;
 		>section{
 			position:relative;
 			display:block;
@@ -94,10 +98,85 @@ body{
 			}
 		}
 		>footer{
+			display:block;
 			position:relative;
 			width:100%;
 			text-align:center;
+			height:20px;	
 		}
 	}
 	background-color:#ffffff;
+}
+$posinputbg:lighten(#000000,90%);
+.posinput{
+	display:block;
+	margin-top:5px;
+	padding-top:2px;
+	background-color:$posinputbg;
+	>input{
+		text-align:center;
+		border:0px;
+		position:relative;
+		width:50%;
+		font-size:40px;
+		padding:3px;
+		border-right: 1px solid $posinputbg;
+		&+input{
+				border-left: 1px solid $posinputbg;
+		}
+		@include box-sizing(border-box);
+	}
+	>a{
+		@include user-select(none);
+		text-align:center;
+		cursor:pointer;
+		position:relative;
+		display:block;
+		margin-top:2px;
+		width:100%;
+		background-color:white;
+		&:before{
+			content:"— ";
+		}
+		&:after{
+			content:" —";
+		}
+		&:hover{
+			color:$dred;	
+		}
+	}
+}
+.radius{
+		@include box-sizing(border-box);
+		text-align:center;
+		border:0px;
+		position:relative;
+		width:100%;
+		font-size:40px;
+		padding:3px;
+		border-top:1px solid $posinputbg;
+		border-bottom:1px solid $posinputbg;
+		
+}
+#mapholder{
+
+	>a{
+		@include user-select(none);
+		text-align:center;
+		cursor:pointer;
+		position:relative;
+		display:block;
+		margin-top:2px;
+		width:100%;
+		background-color:white;
+		&:before{
+			content:"— ";
+		}
+		&:after{
+			content:" —";
+		}
+		&:hover{
+			color:$dred;	
+		}
+	}
 }

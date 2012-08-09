@@ -1,5 +1,10 @@
 <?PHP
-//(c) Thomas NJ Shadwell
+define("DEBUG", 0);
+if(DEBUG==1){
+  ini_set('display_errors',1);
+  ini_set('display_startup_errors',1);
+  error_reporting(-1);
+}
 //General API abstractionv2
 //TODO:Change program function if documenting rather than using api
 define("DOCUMENT_API", isset($_GET["document"]));
