@@ -1,18 +1,21 @@
 from urllib.request import urlopen
 from json import loads, dumps
 #https://maps.google.com/?ll=51.732158,0.75561&spn=0.015336,0.042272&t=m&z=15
+def pinline(x):
+	print(x)
+	return x
 def getJson(url):
 	return loads(urlopen(url).read().decode("UTF-8"))
 def getBathingPoints(minLat, maxLat, minLng, maxLng, pageSize=10, page=0):
-	return getJson("\
-	http://environment.data.gov.uk/doc/bathing-water.json?\
-	min-samplingPoint.lat=%s&\
-	max-samplingPoint.lat=%s&\
-	min-samplingPoint.long=%s&\
-	max-samplingPoint.long=%s&\
-	_page=%s&\
-	_pageSize=%s\
-	"%(minLat, maxLat, minLng, maxLng, pageSize, page))
+	return getJson(pinline("\
+http://environment.data.gov.uk/doc/bathing-water.json?\
+min-samplingPoint.lat=%s&\
+max-samplingPoint.lat=%s&\
+min-samplingPoint.long=%s&\
+max-samplingPoint.long=%s&\
+_page=%s&\
+_pageSize=%s\
+	"%(minLat, maxLat, minLng, maxLng, pageSize, page)))
 def getBathingPointsAround(lat, lng, radius, pageSize, page):
 	minLat=lat-radius
 	maxLat=lat+radius
