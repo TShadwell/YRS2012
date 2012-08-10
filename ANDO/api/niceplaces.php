@@ -35,13 +35,7 @@ function getNicePlaces($lat, $lng, $radius, $count){
 	curl_setopt(
 		$ch,
 		CURLOPT_URL,
-		"http://environment.data.gov.uk/doc/bathing-water.json?
-		min-samplingPointl.lat=$minLat&
-		max-samplingPointl.lat=$maxLat&
-		min-samplingPointl.long=$minLng&
-		max-samplingPointl.long=$maxLng&
-		_page=0&
-		_pageSize=$count"
+		"http://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.lat=$minLat&max-samplingPoint.lat=$maxLat&min-samplingPoint.long=$minLng&max-samplingPoint.long=$maxLng&_page=0&_pageSize=$count"
 	);
 	curl_setopt_array(
 		$ch,
@@ -78,7 +72,15 @@ function getNicePlaces($lat, $lng, $radius, $count){
 				"verdict"=>$place->{"latestSampleAssessment"}->{"sampleClassification"}->{"name"}->{"_value"}
 			),
 
-			"type"=>$place->{"type"}
+			"type"=>$place->{"type"},
+			"samplePoint"=>array(
+				"latitude"=>$place->{"samplingPoint"}->{"lat"},
+				"longitude"=>$place->{"samplingPoint"}->{"long"},
+				"OSGB"=>array(
+					"northing"=>$place->{"samplingPoint"}->{"northing"},
+					"easting"=>$place->{"samplingPoint"}->{"easting"}
+				)
+			)
 		);
 		$tempType=array();
 		foreach($niceDatum["type"] as $type){

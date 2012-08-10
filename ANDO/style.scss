@@ -74,7 +74,7 @@ body{
 				font-size:50px;
 			}
 			>div{
-				$numElements:4;
+				$numElements:3;
 				>figure{
 					cursor:pointer;
 					display:inline-block;
@@ -102,7 +102,7 @@ body{
 			position:relative;
 			width:100%;
 			text-align:center;
-			height:20px;	
+			min-height:20px;	
 		}
 	}
 	background-color:#ffffff;

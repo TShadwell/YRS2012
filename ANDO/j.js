@@ -65,6 +65,43 @@ function beginMapping(lat, lng, zoom){
 				}
 			}
 		);
+		$(".okay", mapholder).click(function(){
+			var pos=window.mapH.selfMarker.getPosition();
+			var lat=pos.Xa;
+			var lng=pos.Ya;
+			$.ajax({
+				url:"api/niceplaces/get.json?lat="+lat+"&lng="+lng+"&radius="+$(".radius", mapholder).val()+"&count=10",
+			}).done(function(d){
+				$("footer").slideUp("fast", function(){
+					var data = d["data"];
+					$.each(data, function(){if(this["type"].indexOf("CoastalBathingWater")!==-1){
+						$("footer").append("<div><header>"+
+this["name"]+"</header><div>Water quality: "+
+this["lastTest"]["verdict"]+"<br/>Types: "+
+this["type"].map(camelToTitle).join(", ")+
+"<br/><span class='.location'>Location:<span><span>Lat/Lng</span>("+
+this.samplePoint["latitude"]+", "+this.samplePoint["longitude"]+
+"</span><span><span>OSGB</span>Northing:"+
+this.samplePoint["OSGB"]["northing"]+"</br>Easting"+
+this.samplePoint["OSGB"]["easting"]+"</span></div>");	
+					}});
+					$("footer").slideDown("slow");
+				});
+			});
+		});
+	
+}
+function camelToTitle(x){
+	var o="", uppercase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	for(var i=0, ed=x.length;i<ed;i++){
+		if(uppercase.indexOf(x[i])===-1){
+			o+=x[i];
+		}
+		else{
+			o+=" "+x[i];
+		}
+	}
+	return o;
 	
 }
 function areDefined(){
@@ -152,9 +189,6 @@ function ndMenuItems(){
 								alert("Your browser isn't modern enough to support this feature. :'(");
 							}
 								
-						}
-						else if(thisAction =="address"){
-							
 						}
 						else if(thisAction == "map"){
 							addMap();
