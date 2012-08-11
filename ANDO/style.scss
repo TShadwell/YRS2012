@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Lobster&text=%20DOayut);
 @import "compass/css3/box-sizing";
 @import url(http://fonts.googleapis.com/css?family=Oleo%20Script&text=ANice);
@@ -36,6 +37,9 @@ $dred:#6D0000;
 	
 	width:100%;
 	height:300px;
+}
+#buttons{
+	margin-top:5px;
 }
 body{
 	>div{
@@ -86,9 +90,6 @@ body{
 						font-size:72px;
 						@include icon;
 						text-shadow:1px 1px 10px rgba(0,0,0,0.7);
-						&:hover{
-							
-						}
 					}
 					>figcaption{
 						font-size:15px;
@@ -101,11 +102,42 @@ body{
 			display:block;
 			position:relative;
 			width:100%;
-			text-align:center;
-			min-height:20px;	
+			min-height:20px;
+			>div{
+				background-color:white;
+				background-position:top left;
+				position:relative;
+				height:auto;
+				margin-top:5px;
+				margin-bottom:5px;
+				width:100%;
+				>header{
+					font-size:40px;
+					&:after{
+						content:attr(data-distance);
+					}
+				}
+				img{
+					position:relative;
+					margin-left:auto;
+					margin-right:auto;
+				}
+				>span.txt{
+					background-color:rgba(255,255,255,0.3);
+				}
+				>span.location{
+					background-color:darken(white,60%);
+					>span{
+						display:block;
+					}
+				}
+			}
 		}
 	}
 	background-color:#ffffff;
+}
+.x{
+	min-height:10px;
 }
 $posinputbg:lighten(#000000,90%);
 .posinput{

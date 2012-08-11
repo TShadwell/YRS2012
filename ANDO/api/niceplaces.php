@@ -7,7 +7,7 @@ function stripURL($url){
 	//slice and dice
 	$splitStr=str_split($url);
 	$o=array_slice($splitStr, getLastIndex("/", $splitStr));
-	return implode("",$o);
+	if(count($o)>0){return implode("",$o);}else{return $url;}
 }
 function convLinkedURL($url){
 	return str_replace(
@@ -58,6 +58,8 @@ function getNicePlaces($lat, $lng, $radius, $count){
 	$niceData=array();
 	foreach ($data as $place){
 		$niceDatum=array(
+			"magicId"=>$place->{"eubwidNotation"},
+			"image"=>"http://environment.data.gov.uk/media/image/bathing-water-profile/".$place->{"eubwidNotation"}."_1-webres.jpg",
 			"sediment"=>	stripURL($place->{"sedimentTypesPresent"}),
 			"yearDesignated"=> stripURL($place->{"yearDesignated"}),
 			"name"=>$place->{"name"}->{"_value"},
@@ -69,7 +71,7 @@ function getNicePlaces($lat, $lng, $radius, $count){
 
 			"lastTest"=>array(
 				"results"=>convLinkedURL($place->{"latestSampleAssessment"}->{"_about"}),
-				"verdict"=>$place->{"latestSampleAssessment"}->{"sampleClassification"}->{"name"}->{"_value"}
+				"verdict"=>$place->{"latestSampleAssessment"}->{"sampleClassification"}->{"name"}->{"_value"},
 			),
 
 			"type"=>$place->{"type"},
@@ -100,7 +102,7 @@ API(
 					"radius",
 					"count"
 			),
-			getNicePlaces
+			'getNicePlaces'
 		)
 	)
 );
